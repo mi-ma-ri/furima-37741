@@ -23,11 +23,11 @@
 |      Column        |     Type     |   Options   |
 | ------------------ | ------------ | ----------- |
 |       user         |  references  | null: false, foreign_key:true |
-|     item-name      |    string    | null: false |
+|     item_name      |    string    | null: false |
 |    descryption     |     text     | null: false |
 |     category_id    |    integer   | null: false |
 |      status_id     |    integer   | null: false |
-|     ship-cost_id   |    integer   | null: false |
+|     ship_cost_id   |    integer   | null: false |
 |     prefecture_id  |    integer   | null: false |
 |      schedule_id   |    integer   | null: false |
 |       price        |    integer   | null: false |
@@ -59,7 +59,7 @@
 |    city          |    string    | null: false |
 |    adress        |    string    | null: false |
 |    building      |    string     
-|    phone-num     |    string    | null: false |
+|    phone_num     |    string    | null: false |
 
 ### Association
 
