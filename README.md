@@ -5,8 +5,8 @@
 |      Column        |  Type  |   Options   |
 | ------------------ | ------ | ----------- |
 |      nickname      | string | null: false | 
-|       email        | string | null: false |
-| encrypted_password | string | null: false |
+|       email        | string | null: false,unique: true |
+| encrypted_password | string | null: false,unique: true |
 |     last_name      | string | null: false |
 |     first_name     | string | null: false |
 | last_name_katakana | string | null: false |
@@ -25,11 +25,11 @@
 |       user         |  references  | null: false, foreign_key:true |
 |     item-name      |    string    | null: false |
 |    descryption     |     text     | null: false |
-|     category       |    integer   | null: false |
-|      status        |    integer   | null: false |
-|     ship-cost      |    integer   | null: false |
-|     prefecture     |    integer   | null: false |
-|      schedule      |    integer   | null: false |
+|     category_id    |    integer   | null: false |
+|      status_id     |    integer   | null: false |
+|     ship-cost_id   |    integer   | null: false |
+|     prefecture_id  |    integer   | null: false |
+|      schedule_id   |    integer   | null: false |
 |       price        |    integer   | null: false |
 
 ### Association
@@ -55,7 +55,7 @@
 | ---------------- | ------------ | ----------- |
 |    order         |  references  | null: false, foreign_key:true |
 |    postcode      |    string    | null: false |
-|    prefecture    |   integer    | null: false |
+|    prefecture_id |   integer    | null: false |
 |    city          |    string    | null: false |
 |    adress        |    string    | null: false |
 |    building      |    string     
