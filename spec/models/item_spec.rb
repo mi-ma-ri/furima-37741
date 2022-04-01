@@ -38,17 +38,61 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank", "Category is not a number")
       end
+      it '商品カテゴリーが「---」だと出品できない' do
+        @item.category_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category can't be blank", "Category is not a number")
+      end
       it '商品状態が空だと出品できない' do
         @item.status_id = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Status can't be blank")
       end
-      it ''
+      it '商品状態が「---」だと出品できない' do
+        @item.status_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Status can't be blank")
+      end
+      it '配送料が空だと出品できない' do
         @item.ship_cost_id = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("")
+        expect(@item.errors.full_messages).to include("Ship cost can't be blank")
       end
-      it ''
+      it '配送料が「---」だと出品できない' do
+        @item.ship_cost_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Ship cost can't be blank")
+      end
+      it '発送地域が空だと出品できない' do
+        @item.prefecture_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Prefecture can't be blank")
+      end
+      it '発送地域が「---」だと出品できない' do
+        @item.prefecture_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Prefecture can't be blank")
+      end
+      it '発送日数が空だと出品できない' do
+        @item.schedule_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Schedule can't be blank")
+      end
+      it '発送日数が「---」だと出品できない' do
+        @item.schedule_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Schedule can't be blank")
+      end
+      it '販売価格が空だと出品できない' do
+        @item.price = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price can't be blank", "Price is not a number")
+      end
+      it '販売価格が300円未満だと出品できない' do
+        @item.price = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price can't be blank", "Price is not a number")
+      end
     end
   end
 end
