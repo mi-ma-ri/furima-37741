@@ -16,7 +16,7 @@ RSpec.describe Item, type: :model do
       it 'ユーザー登録してる人でないと登録できない' do
         @item.user_id = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("User must exist", "User can't be blank")
+        expect(@item.errors.full_messages).to include("User can't be blank")
       end
       it '商品画像がないと登録できない' do
         @item.image = nil
@@ -36,12 +36,7 @@ RSpec.describe Item, type: :model do
       it '商品カテゴリーが空だと出品できない' do
         @item.category_id = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category can't be blank", "Category is not a number")
-      end
-      it '商品カテゴリーが「---」だと出品できない' do
-        @item.category_id = nil
-        @item.valid?
-        expect(@item.errors.full_messages).to include("Category can't be blank", "Category is not a number")
+        expect(@item.errors.full_messages).to include("Category can't be blank")
       end
       it '商品状態が空だと出品できない' do
         @item.status_id = nil
@@ -86,12 +81,22 @@ RSpec.describe Item, type: :model do
       it '販売価格が空だと出品できない' do
         @item.price = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price can't be blank", "Price is not a number")
+        expect(@item.errors.full_messages).to include("Price can't be blank")
       end
       it '販売価格が300円未満だと出品できない' do
         @item.price = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price can't be blank", "Price is not a number")
+        expect(@item.errors.full_messages).to include("Price can't be blank")
+      end
+      it '価格に半角数字以外が含まれている場合は出品できない' do
+        @item.price = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price can't be blank")
+      end
+      it '価格が9_999_999円を超えると出品できない' do
+        @item.price = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price can't be blank")
       end
     end
   end
