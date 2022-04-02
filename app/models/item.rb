@@ -16,7 +16,6 @@ class Item < ApplicationRecord
   belongs_to :schedule
 
   with_options presence: true do
-    validates :user_id
     validates :item_name
     validates :image
     validates :descryption
@@ -30,7 +29,6 @@ class Item < ApplicationRecord
 
     # ジャンルの選択が「--」の時は保存不可
     with_options numericality: { other_than: 0  } do
-      validates :category_id
       validates :category_id
       validates :status_id
       validates :ship_cost_id

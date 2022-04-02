@@ -16,7 +16,7 @@ RSpec.describe Item, type: :model do
       it 'ユーザー登録してる人でないと登録できない' do
         @item.user_id = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include("User can't be blank")
+        expect(@item.errors.full_messages).to include("User must exist")
       end
       it '商品画像がないと登録できない' do
         @item.image = nil
@@ -37,6 +37,11 @@ RSpec.describe Item, type: :model do
         @item.category_id = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
+      end
+      it '商品カテゴリーが「---」だと出品できない' do
+        @item.category_id = 0
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category must be other than 0")
       end
       it '商品状態が空だと出品できない' do
         @item.status_id = nil
