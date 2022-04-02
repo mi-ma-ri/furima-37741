@@ -29,12 +29,12 @@ class Item < ApplicationRecord
   end
 
     # ジャンルの選択が「--」の時は保存不可
-    validates :category_id, numericality: { other_than: 0  } do
+    with_options numericality: { other_than: 0  } do
+      validates :category_id
       validates :category_id
       validates :status_id
       validates :ship_cost_id
       validates :prefecture_id
       validates :schedule_id
-
   end
 end

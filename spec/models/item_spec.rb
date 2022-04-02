@@ -44,9 +44,9 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Status can't be blank")
       end
       it '商品状態が「---」だと出品できない' do
-        @item.status_id = nil
+        @item.status_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include("Status can't be blank")
+        expect(@item.errors.full_messages).to include("Status must be other than 0")
       end
       it '配送料が空だと出品できない' do
         @item.ship_cost_id = nil
@@ -54,9 +54,9 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Ship cost can't be blank")
       end
       it '配送料が「---」だと出品できない' do
-        @item.ship_cost_id = nil
+        @item.ship_cost_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include("Ship cost can't be blank")
+        expect(@item.errors.full_messages).to include("Ship cost must be other than 0")
       end
       it '発送地域が空だと出品できない' do
         @item.prefecture_id = nil
@@ -64,9 +64,9 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Prefecture can't be blank")
       end
       it '発送地域が「---」だと出品できない' do
-        @item.prefecture_id = nil
+        @item.prefecture_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include("Prefecture can't be blank")
+        expect(@item.errors.full_messages).to include("Prefecture must be other than 0")
       end
       it '発送日数が空だと出品できない' do
         @item.schedule_id = nil
@@ -74,9 +74,9 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Schedule can't be blank")
       end
       it '発送日数が「---」だと出品できない' do
-        @item.schedule_id = nil
+        @item.schedule_id = 0
         @item.valid?
-        expect(@item.errors.full_messages).to include("Schedule can't be blank")
+        expect(@item.errors.full_messages).to include("Schedule must be other than 0")
       end
       it '販売価格が空だと出品できない' do
         @item.price = nil
@@ -84,19 +84,19 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
       it '販売価格が300円未満だと出品できない' do
-        @item.price = nil
+        @item.price = 100
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price can't be blank")
+        expect(@item.errors.full_messages).to include("Price must be greater than or equal to 300")
       end
       it '価格に半角数字以外が含まれている場合は出品できない' do
-        @item.price = nil
+        @item.price = '5,000'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price can't be blank")
+        expect(@item.errors.full_messages).to include("Price is not a number")
       end
       it '価格が9_999_999円を超えると出品できない' do
-        @item.price = nil
+        @item.price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price can't be blank")
+        expect(@item.errors.full_messages).to include("Price must be less than or equal to 9999999")
       end
     end
   end
