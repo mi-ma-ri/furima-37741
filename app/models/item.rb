@@ -34,5 +34,5 @@ class Item < ApplicationRecord
       validates :ship_cost_id
       validates :prefecture_id
       validates :schedule_id
-  end
+    end
 end
