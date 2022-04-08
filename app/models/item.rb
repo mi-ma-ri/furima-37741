@@ -3,7 +3,7 @@ class Item < ApplicationRecord
   
   #モデルのアソシエーション
   belongs_to :user
-  #has_one :order
+  has_one :order
 
   #イメージファイルの紐付け
   has_one_attached :image
