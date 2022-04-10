@@ -10,7 +10,6 @@ class OrdersController < ApplicationController
 
 
   def create
-    @item = Item.find(params[:item_id])
     @order_payment = OrderPayment.new(order_params)
     if @order_payment.valid?
        pay_item
