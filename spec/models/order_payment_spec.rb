@@ -13,6 +13,7 @@ RSpec.describe OrderPayment, type: :model do
         expect(@order_payment).to be_valid
       end
       it '建物名は空でも登録できる' do
+        @order_payment.building = ''
         expect(@order_payment).to be_valid
       end
     end
@@ -34,7 +35,7 @@ RSpec.describe OrderPayment, type: :model do
         expect(@order_payment.errors.full_messages).to include("Postcode can't be blank")
       end
       it '郵便番号にハイフンがないと購入できない' do
-        @order_payment.postcode = 123-4567
+        @order_payment.postcode = '1234567'
         @order_payment.valid?
         expect(@order_payment.errors.full_messages).to include("Postcode is invalid. Include hyphen(-)")
       end
@@ -69,10 +70,15 @@ RSpec.describe OrderPayment, type: :model do
         expect(@order_payment.errors.full_messages).to include("Phone num is invalid")
       end
       it '電話番号が12桁以上あると保存できないこと' do
-         @order_payment.phone_num = '12_34_56_78_910_12_31_11'
+         @order_payment.phone_num = '123456789101'
          @order_payment.valid?
          expect(@order_payment.errors.full_messages).to include("Phone num is invalid")   
       end
+      it '電話番号が10桁に満たないとき購入できない' do
+        @order_payment.phone_num = '123456789'
+        @order_payment.valid?
+        expect(@order_payment.errors.full_messages).to include("Phone num is invalid")
+      end  
       it 'トークンが空だと購入できない' do
         @order_payment.token = nil
         @order_payment.valid?
