@@ -5,10 +5,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
          has_many :items
+         has_many :orders
 
-  with_options presence: true do
     PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i.freeze
     validates_format_of :password, with: PASSWORD_REGEX
+
+  with_options presence: true do
     validates :nickname
     validates :last_name, format: { with: /\A[ぁ-んァ-ン一-龥々ー]+\z/ }
     validates :first_name, format: { with: /\A[ぁ-んァ-ン一-龥々ー]+\z/ }
